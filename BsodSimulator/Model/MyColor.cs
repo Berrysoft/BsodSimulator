@@ -13,17 +13,14 @@ namespace BsodSimulator.Model
     {
         public string Name { get; private set; }
         public Brush Brush { get; private set; }
-        public byte R { get;private set; }
+        public byte R { get; private set; }
         public byte B { get; private set; }
         public byte G { get; private set; }
         public byte A { get; private set; }
 
         private static IReadOnlyList<MyColor> myColors;
 
-        public static MyColor GetColorByName(string name)
-        {
-            return myColors.Single(c => c.Name == name);
-        }
+        public static MyColor GetColorByName(string name) => myColors.Single(c => c.Name == name);
 
         public static IReadOnlyList<MyColor> GetColors()
         {

@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
-using System.Reflection;
-using Windows.UI.Xaml.Media;
-using System.Threading;
-using BsodSimulator.Util;
-using Windows.UI.Xaml.Controls;
-using BsodSimulator.Model;
-using Windows.UI.Xaml.Media.Imaging;
+﻿using BsodSimulator.Model;
 using BsodSimulator.Service;
+using BsodSimulator.Util;
 using BsodSimulator.View;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
+
 namespace BsodSimulator.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
         public MyColor SelectedColor
         {
-            get { return _selectedColor; }
-            set { SetProperty(ref _selectedColor, value,callback:async () => Bitmap = await QRCodeService.GenerateQRCodeAsync(Url, SelectedColor)); }
+            get => _selectedColor;
+            set => SetProperty(ref _selectedColor, value,
+              callback: async () => Bitmap = await QRCodeService.GenerateQRCodeAsync(Url, SelectedColor));
         }
 
         private MyColor _selectedColor;
@@ -31,8 +26,8 @@ namespace BsodSimulator.ViewModel
 
         public string Emoji
         {
-            get { return _emoji; }
-            set { SetProperty(ref _emoji, value); }
+            get => _emoji;
+            set => SetProperty(ref _emoji, value);
         }
 
 
@@ -40,16 +35,16 @@ namespace BsodSimulator.ViewModel
 
         public string Description
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get => _description;
+            set => SetProperty(ref _description, value);
         }
 
         private WriteableBitmap _bitmap;
 
         public WriteableBitmap Bitmap
         {
-            get { return _bitmap; }
-            set { SetProperty(ref _bitmap, value); }
+            get => _bitmap;
+            set => SetProperty(ref _bitmap, value);
         }
 
 
@@ -57,8 +52,8 @@ namespace BsodSimulator.ViewModel
 
         public int Percentage
         {
-            get { return _percent; }
-            set { SetProperty(ref _percent, value); }
+            get => _percent;
+            set => SetProperty(ref _percent, value);
         }
 
 
@@ -66,9 +61,9 @@ namespace BsodSimulator.ViewModel
 
         public bool DynamicPercentage
         {
-            get { return _dynamicPercentage; }
-            set { SetProperty(ref _dynamicPercentage, value,
-                callback: () => Percentage = 0); }
+            get => _dynamicPercentage;
+            set => SetProperty(ref _dynamicPercentage, value,
+              callback: () => Percentage = 0);
         }
 
 
@@ -76,10 +71,9 @@ namespace BsodSimulator.ViewModel
 
         public string Url
         {
-            get { return _url; }
-            set { SetProperty(ref _url, value, callback: async() =>
-              Bitmap=await QRCodeService.GenerateQRCodeAsync(Url, SelectedColor)
-            ); }
+            get => _url;
+            set => SetProperty(ref _url, value, callback: async () =>
+             Bitmap = await QRCodeService.GenerateQRCodeAsync(Url, SelectedColor));
         }
 
 
@@ -87,8 +81,8 @@ namespace BsodSimulator.ViewModel
 
         public string StopCode
         {
-            get { return _stopCode; }
-            set { SetProperty(ref _stopCode, value); }
+            get => _stopCode;
+            set => SetProperty(ref _stopCode, value);
         }
 
         public List<MyColor> MyColors;
@@ -97,37 +91,28 @@ namespace BsodSimulator.ViewModel
 
         public bool ClassicBSOD
         {
-            get { return _classicBSOD; }
-            set
-            {
-                SetProperty(ref _classicBSOD, value,callback:()=> 
-                    {
-                        if (_classicBSOD)
-                        {
-                            SelectedColor = MyColor.GetColorByName("DodgerBlue");
-                        }
-                    });
-               
-            }
+            get => _classicBSOD;
+            set => SetProperty(ref _classicBSOD, value, callback: () =>
+                       {
+                           if (_classicBSOD)
+                           {
+                               SelectedColor = MyColor.GetColorByName("DodgerBlue");
+                           }
+                       });
         }
 
         private bool _insiderGSOD;
 
         public bool InsiderGSOD
         {
-            get { return _insiderGSOD; }
-            set
-            {
-                SetProperty(ref _insiderGSOD, value, callback: () =>
-                {
-                    if (InsiderGSOD)
-                    {
-                        SelectedColor = MyColor.GetColorByName("LimeGreen");
-                    }
-                }
-                    );
-               
-            }
+            get => _insiderGSOD;
+            set => SetProperty(ref _insiderGSOD, value, callback: () =>
+                 {
+                     if (InsiderGSOD)
+                     {
+                         SelectedColor = MyColor.GetColorByName("LimeGreen");
+                     }
+                 });
         }
 
         public bool RestartUponComplete { get; set; }
@@ -155,8 +140,7 @@ namespace BsodSimulator.ViewModel
 
             RestartUponComplete = true;
 
-            GoToBSODPageCommand = new RelayCommand<Frame>(
-                f => f.Navigate(typeof(BsodPage), this));
+            GoToBSODPageCommand = new RelayCommand<Frame>(f => f.Navigate(typeof(BsodPage), this));
 
             Url = "http://windows.com/stopcode";
 
@@ -204,5 +188,5 @@ namespace BsodSimulator.ViewModel
 
     }
 
-  
+
 }

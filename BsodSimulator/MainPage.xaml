@@ -29,13 +29,13 @@
                     <RadioButton
                         Margin="10"
                         GroupName="color"
-                        IsChecked="{x:Bind VM.ClassicBSOD, Mode=TwoWay, Converter={StaticResource MakeCompilerHappy}}">
+                        IsChecked="{x:Bind VM.ClassicBSOD, Mode=TwoWay}">
                         BSOD(Classic)
                     </RadioButton>
                     <RadioButton
                         Margin="10"
                         GroupName="color"
-                        IsChecked="{x:Bind VM.InsiderGSOD, Mode=TwoWay, Converter={StaticResource MakeCompilerHappy}}">
+                        IsChecked="{x:Bind VM.InsiderGSOD, Mode=TwoWay}">
                         GSOD(Insider)
                     </RadioButton>
                     <RadioButton
@@ -53,8 +53,8 @@
                     Margin="10"
                     Header="Pick a color"
                     ItemsSource="{x:Bind VM.MyColors}"
-                    SelectedItem="{x:Bind VM.SelectedColor, Mode=TwoWay, Converter={StaticResource MakeCompilerHappy}}"
-                    Visibility="{x:Bind CustomColorRadioButton.IsChecked, Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
+                    SelectedItem="{x:Bind VM.SelectedColor, Mode=TwoWay}"
+                    Visibility="{x:Bind CustomColorRadioButton.IsChecked, Mode=OneWay}">
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="model:MyColor">
                             <Border BorderBrush="Black" BorderThickness="2">
@@ -117,7 +117,7 @@
                     <CheckBox
                         Name="DynamicPercentageCheckBox"
                         Margin="10"
-                        IsChecked="{x:Bind VM.DynamicPercentage, Mode=TwoWay,Converter={StaticResource MakeCompilerHappy}}">
+                        IsChecked="{x:Bind VM.DynamicPercentage, Mode=TwoWay}">
                         Auto-incremental progress
                     </CheckBox>
                     <Slider
@@ -127,11 +127,11 @@
                         IsEnabled="{x:Bind DynamicPercentageCheckBox.IsChecked.Value, Mode=OneWay, Converter={StaticResource BooleanNotConverter}}"
                         Maximum="100"
                         Minimum="0"
-                        Value="{x:Bind VM.Percentage, Mode=TwoWay, Converter={StaticResource IntDoubleTwoWayConverter}}" />
+                        Value="{x:Bind VM.Percentage, Mode=TwoWay}" />
                 </StackPanel>
                 <CheckBox
                     Margin="10"
-                    IsChecked="{x:Bind VM.RestartUponComplete, Mode=TwoWay, Converter={StaticResource MakeCompilerHappy}}"
+                    IsChecked="{x:Bind VM.RestartUponComplete, Mode=TwoWay}"
                     IsEnabled="{x:Bind DynamicPercentageCheckBox.IsChecked.Value, Mode=OneWay}">
                     Show restart page upon complete
                 </CheckBox>

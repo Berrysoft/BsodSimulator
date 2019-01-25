@@ -6,20 +6,10 @@
     xmlns:local="using:BsodSimulator.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <Grid Background="{x:Bind VM.SelectedColor.Brush}">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ProgressRing
-                Width="50"
-                Height="50"
-                Foreground="White"
-                IsActive="True" />
-            <TextBlock
-                Margin="20"
-                FontSize="20"
-                Foreground="White">
-                Restarting Windows
-            </TextBlock>
+            <ProgressRing Width="50" Height="50" Foreground="White" IsActive="True" />
+            <TextBlock Margin="20" FontSize="20" Foreground="White">Restarting Windows</TextBlock>
         </StackPanel>
     </Grid>
 </Page>
