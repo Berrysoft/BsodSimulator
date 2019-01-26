@@ -18,11 +18,11 @@ namespace BsodSimulator.Model
         public byte G { get; private set; }
         public byte A { get; private set; }
 
-        private static IReadOnlyList<MyColor> myColors;
+        private static List<MyColor> myColors;
 
         public static MyColor GetColorByName(string name) => myColors.Single(c => c.Name == name);
 
-        public static IReadOnlyList<MyColor> GetColors()
+        public static List<MyColor> GetColors()
         {
             if (myColors == null)
             {

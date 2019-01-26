@@ -123,41 +123,28 @@ namespace BsodSimulator.ViewModel
 
         public MainViewModel()
         {
-            MyColors = new List<MyColor>(MyColor.GetColors());
-
+            MyColors = MyColor.GetColors();
             Emoji = ":(";
-
             Description = "Your PC ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart for you";
-
             Percentage = 0;
-
-
             StopCode = "KERNEL_MODE_HEAP_CORRUPTION";
-
             ClassicBSOD = true;
-
             DynamicPercentage = true;
-
             RestartUponComplete = true;
-
             GoToBSODPageCommand = new RelayCommand<Frame>(f => f.Navigate(typeof(BsodPage), this));
-
             Url = "http://windows.com/stopcode";
-
         }
         public async Task UpdateProgress(CancellationToken t)
         {
             int progress = Percentage;
             try
             {
-
                 await Task.Delay(1000, t);//wait until navigation finishes
-
-                Random r = new Random();
                 if (!DynamicPercentage)
                 {
                     return;
                 }
+                Random r = new Random();
                 while (_percent < 100)
                 {
                     if (r.Next() % 2 != 0)
@@ -172,7 +159,6 @@ namespace BsodSimulator.ViewModel
                         await Task.Delay(interval, t);
                         Percentage += step;
                     }
-
                 }
             }
             catch (TaskCanceledException)
@@ -183,10 +169,6 @@ namespace BsodSimulator.ViewModel
             {
                 Percentage = progress;
             }
-
         }
-
     }
-
-
 }

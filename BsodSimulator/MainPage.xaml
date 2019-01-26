@@ -7,10 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:BsodSimulator.Model"
     mc:Ignorable="d">
-
-    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer Background="{ThemeResource SystemControlAcrylicWindowBrush}">
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -18,59 +16,20 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="3*" />
-
             </Grid.ColumnDefinitions>
-            <StackPanel
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Margin="10">
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="10">
                 <TextBlock>Choose a mode</TextBlock>
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton
-                        Margin="10"
-                        GroupName="color"
-                        IsChecked="{x:Bind VM.ClassicBSOD, Mode=TwoWay}">
-                        BSOD(Classic)
-                    </RadioButton>
-                    <RadioButton
-                        Margin="10"
-                        GroupName="color"
-                        IsChecked="{x:Bind VM.InsiderGSOD, Mode=TwoWay}">
-                        GSOD(Insider)
-                    </RadioButton>
-                    <RadioButton
-                        Name="CustomColorRadioButton"
-                        Margin="10"
-                        GroupName="color">
-                        Custom
-                    </RadioButton>
+                    <RadioButton Margin="10" GroupName="color" IsChecked="{x:Bind VM.ClassicBSOD, Mode=TwoWay}">BSOD(Classic)</RadioButton>
+                    <RadioButton Margin="10" GroupName="color" IsChecked="{x:Bind VM.InsiderGSOD, Mode=TwoWay}">GSOD(Insider)</RadioButton>
+                    <RadioButton Name="CustomColorRadioButton" Margin="10" GroupName="color">Custom</RadioButton>
                 </StackPanel>
-                <GridView
-                    x:Name="Colors"
-                    Grid.Row="0"
-                    Grid.ColumnSpan="2"
-                    Height="250"
-                    Margin="10"
-                    Header="Pick a color"
-                    ItemsSource="{x:Bind VM.MyColors}"
-                    SelectedItem="{x:Bind VM.SelectedColor, Mode=TwoWay}"
-                    Visibility="{x:Bind CustomColorRadioButton.IsChecked, Mode=OneWay}">
+                <GridView x:Name="Colors" Grid.Row="0" Grid.ColumnSpan="2" Height="250" Margin="10" Header="Pick a color" ItemsSource="{x:Bind VM.MyColors}" SelectedItem="{x:Bind VM.SelectedColor, Mode=TwoWay}" Visibility="{x:Bind CustomColorRadioButton.IsChecked, Mode=OneWay}">
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="model:MyColor">
                             <Border BorderBrush="Black" BorderThickness="2">
-                                <Rectangle
-                                    Width="30"
-                                    Height="30"
-                                    Fill="{x:Bind Brush}">
-                                    <ToolTipService.ToolTip>
-                                        <ToolTip>
-                                            <TextBlock Text="{x:Bind Name}" />
-                                        </ToolTip>
-                                    </ToolTipService.ToolTip>
-
-                                </Rectangle>
+                                <Rectangle Width="30" Height="30" Fill="{x:Bind Brush}" ToolTipService.ToolTip="{x:Bind Name}"/>
                             </Border>
-
                         </DataTemplate>
                     </GridView.ItemTemplate>
                     <GridView.ItemContainerStyle>
@@ -79,83 +38,23 @@
                             <Setter Property="Margin" Value="0" />
                         </Style>
                     </GridView.ItemContainerStyle>
-
-
-
                 </GridView>
             </StackPanel>
-            <StackPanel
-                Name="ValueStackPanel"
-                Grid.Row="1"
-                Margin="10">
-                <TextBox
-                    x:Name="Emoji"
-                    Margin="10"
-                    Header="Emoji"
-                    Text="{x:Bind VM.Emoji, Mode=TwoWay}"
-                    TextWrapping="Wrap" />
-                <TextBox
-                    x:Name="Description"
-                    Margin="10"
-                    Header="Descrption"
-                    Text="{x:Bind VM.Description, Mode=TwoWay}"
-                    TextWrapping="Wrap" />
-                <TextBox
-                    x:Name="Url"
-                    Margin="10"
-                    Header="Url"
-                    Text="{x:Bind VM.Url, Mode=TwoWay}"
-                    TextWrapping="Wrap" />
-                <TextBox
-                    x:Name="StopCode"
-                    Margin="10"
-                    Header="StopCode"
-                    Text="{x:Bind VM.StopCode, Mode=TwoWay}"
-                    TextWrapping="Wrap" />
-
+            <StackPanel Name="ValueStackPanel" Grid.Row="1" Margin="10">
+                <TextBox x:Name="Emoji" Margin="10" Header="Emoji" Text="{x:Bind VM.Emoji, Mode=TwoWay}" TextWrapping="Wrap" />
+                <TextBox x:Name="Description" Margin="10" Header="Descrption" Text="{x:Bind VM.Description, Mode=TwoWay}" TextWrapping="Wrap" />
+                <TextBox x:Name="Url" Margin="10" Header="Url" Text="{x:Bind VM.Url, Mode=TwoWay}" TextWrapping="Wrap" />
+                <TextBox x:Name="StopCode" Margin="10" Header="StopCode" Text="{x:Bind VM.StopCode, Mode=TwoWay}" TextWrapping="Wrap" />
                 <StackPanel>
-                    <CheckBox
-                        Name="DynamicPercentageCheckBox"
-                        Margin="10"
-                        IsChecked="{x:Bind VM.DynamicPercentage, Mode=TwoWay}">
-                        Auto-incremental progress
-                    </CheckBox>
-                    <Slider
-                        x:Name="Percent"
-                        Margin="10"
-                        Header="Progress"
-                        IsEnabled="{x:Bind DynamicPercentageCheckBox.IsChecked.Value, Mode=OneWay, Converter={StaticResource BooleanNotConverter}}"
-                        Maximum="100"
-                        Minimum="0"
-                        Value="{x:Bind VM.Percentage, Mode=TwoWay}" />
+                    <CheckBox Name="DynamicPercentageCheckBox" Margin="10" IsChecked="{x:Bind VM.DynamicPercentage, Mode=TwoWay}">Auto-incremental progress</CheckBox>
+                    <Slider x:Name="Percent" Margin="10" Header="Progress" IsEnabled="{x:Bind DynamicPercentageCheckBox.IsChecked.Value, Mode=OneWay, Converter={StaticResource BooleanNotConverter}}" Maximum="100" Minimum="0" Value="{x:Bind VM.Percentage, Mode=TwoWay}" />
                 </StackPanel>
-                <CheckBox
-                    Margin="10"
-                    IsChecked="{x:Bind VM.RestartUponComplete, Mode=TwoWay}"
-                    IsEnabled="{x:Bind DynamicPercentageCheckBox.IsChecked.Value, Mode=OneWay}">
-                    Show restart page upon complete
-                </CheckBox>
-                <Button
-                    Margin="10"
-                    Background="{x:Bind VM.SelectedColor.Brush, Mode=OneWay}"
-                    BorderThickness="0"
-                    Command="{x:Bind VM.GoToBSODPageCommand}"
-                    CommandParameter="{x:Bind Frame}">
-                    Trigger bug check!
-                </Button>
+                <CheckBox Margin="10" IsChecked="{x:Bind VM.RestartUponComplete, Mode=TwoWay}" IsEnabled="{x:Bind DynamicPercentageCheckBox.IsChecked.Value, Mode=OneWay}">Show restart page upon complete</CheckBox>
+                <Button Margin="10" Background="{x:Bind VM.SelectedColor.Brush, Mode=OneWay}" BorderThickness="0" Command="{x:Bind VM.GoToBSODPageCommand}" CommandParameter="{x:Bind Frame}">Trigger bug check!</Button>
             </StackPanel>
-            <TextBlock
-                Name="NoteTextBlock"
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="20"
-                FontSize="25"
-                TextWrapping="WrapWholeWords">
-                <Run>
-                    Please note that the application
-                    will go </Run>
+            <TextBlock Name="NoteTextBlock" Grid.Row="1" Grid.Column="1" Margin="20" FontSize="25" TextWrapping="WrapWholeWords">
+                <Run>Please note that the application will go</Run>
                 <Run Foreground="Red"> FULLSCREEN </Run>
-
                 <Run>and make mouse cursor</Run>
                 <Run Foreground="Red"> INVISIBLE </Run>
                 <Run>once you click the button.</Run>
@@ -163,9 +62,8 @@
                     If you check the &quot;Show restart page upon complete&quot; checkbox ,after the progress
                     go to 100% you'll be shown a restart page which takes forever to complete.
                 </Run>
-               
-                <LineBreak /><Run>You can always use titlebar and Task View(ALT+TAB) to exit the app</Run>
-
+                <LineBreak />
+                <Run>You can always use titlebar and Task View(ALT+TAB) to exit the app</Run>
             </TextBlock>
         </Grid>
         <VisualStateManager.VisualStateGroups>
@@ -188,7 +86,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                 </VisualState>
-
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </ScrollViewer>
